@@ -14,12 +14,18 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      guest: true,
+    },
   },
   {
     path: '/register',
     name: 'Register',
-    component: Register
+    component: Register,
+    meta: {
+      guest: true,
+    },
   },
   {
     path: '/dashboard',
@@ -41,6 +47,16 @@ router.beforeEach((to, from, next) => {
     if (!store.getters['auth/authenticated']) {
       next({
         name: 'Login',
+      })
+    }
+    else {
+      next()
+    }
+  }
+  else if (to.matched.some(record => record.meta.guest)) {
+    if (store.getters['auth/authenticated']) {
+      next({
+        name: 'Dashboard',
       })
     }
     else {
