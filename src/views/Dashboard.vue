@@ -8,7 +8,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import api from "../apis/api";
+import { api, authHeader } from "../apis/api";
 
 export default {
   computed: {
@@ -19,9 +19,7 @@ export default {
   },
   created() {
     if (this.authenticated && this.token != "") {
-      api
-        .get("/me")
-        .then((res) => console.log(res));
+      api.get("/me", { headers: authHeader() }).then((res) => console.log(res));
     }
   },
 };

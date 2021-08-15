@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import api from "../apis/api";
+import { api } from "../apis/api";
 import { mapActions } from "vuex";
 export default {
   data() {
@@ -51,15 +51,11 @@ export default {
           this.loginErrors = "";
           this.setAuthenticated(true);
           this.setToken(res.data.access_token);
-          //set to all next api calls the bearer token
-          api.defaults.headers.common[
-            "Authorization"
-          ] = `Bearer ${res.data.access_token}`;
+          this.$router.push({name: 'Dashboard'})
         })
         .catch((error) => {
           this.setAuthenticated(false);
           this.setToken("");
-          delete api.defaults.headers.common["Authorization"];
           this.loginErrors = error.response.data;
           console.log("ERRRR:: ", error.response.data);
         });
