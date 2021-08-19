@@ -67,6 +67,7 @@ export default {
           this.registrationErrors = "";
           this.setAuthenticated(true);
           this.setToken(res.data.access_token);
+          this.$router.push({name : 'Dashboard'})
         })
         .catch((error) => {
           this.setAuthenticated(false);

@@ -19,7 +19,7 @@ export default {
   },
   created() {
     if (this.authenticated && this.token != "") {
-      api.get("/me", { headers: authHeader() }).then((res) => console.log(res));
+      api.get("/me", {headers: authHeader()}).then((res) => console.log(res));
     }
   },
 };
